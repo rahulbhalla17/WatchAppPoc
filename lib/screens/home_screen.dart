@@ -8,6 +8,8 @@ import 'package:pocwatchapp/models/product_model.dart';
 import 'package:pocwatchapp/screens/add_product.dart';
 import 'package:pocwatchapp/utilities/constants.dart';
 import 'package:pocwatchapp/screens/cart_page.dart';
+import 'package:flutter/foundation.dart' show kIsWeb;
+
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({Key? key}) : super(key: key);
@@ -115,7 +117,15 @@ Widget build(BuildContext context) {
   Widget homeBody() {
     var size = MediaQuery.of(context).size;
     /*24 is for notification bar on Android*/
-    final double itemHeight = (size.height - kToolbarHeight - 24) / 2;
+    double itemHeight ;
+    if (kIsWeb) {
+      itemHeight = size.height;
+      // running on the web!
+    } else {
+      itemHeight = (size.height - kToolbarHeight - 24) / 2;
+      // NOT running on the web! You can check for additional platforms here.
+    }
+
     final double itemWidth = size.width / 2;
     print(itemWidth);
     print(itemHeight);
@@ -156,19 +166,11 @@ Widget build(BuildContext context) {
                                   Uri.parse(data.imageUrl).isAbsolute ? data.imageUrl : "https://images-na.ssl-images-amazon.com/images/I/81wGRwNp2VL._UL1500_.jpg",
                                   width: 250,
                                   height: 100),
+
                               myWidget(data.title),
                               myWidget2(data.description),
                               myWidget2(data.price.toString()),
 
-                              // Text(data.title,
-                              //     style: kProductTitleTextStyle,
-                              //     textAlign: kProductTextAligment),
-                              // Text(data.description,
-                              //     style: kProductDescriptionTextStyle,
-                              //     textAlign: kProductTextAligment),
-                              // Text(data.price.toString(),
-                              //     style: kProductPriceTextStyle,
-                              //     textAlign: kProductTextAligment),
                               Container(
                                 child: ElevatedButton(
                                   style: ElevatedButton.styleFrom(

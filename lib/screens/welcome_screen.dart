@@ -1,10 +1,9 @@
 import 'dart:ui';
-
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:pocwatchapp/screens/home_screen.dart';
 import 'package:pocwatchapp/utilities/constants.dart';
-
+import 'package:pocwatchapp/screens/login_screen.dart';
 
 class WelcomeScreen extends StatelessWidget {
   const WelcomeScreen({Key? key}) : super(key: key);
@@ -44,19 +43,21 @@ class WelcomeScreen extends StatelessWidget {
                 textAlign: TextAlign.center,
 
               ),
-             Container(
-               width: 200,
-               height: 200,
-               decoration: BoxDecoration(
-                   borderRadius: BorderRadius.circular(5),
-                   color: Colors.white,
-
-                   image: DecorationImage(
-                       image: AssetImage('images/main.jpeg'),
-                       fit: BoxFit.cover
-                   )
-               ),
-             ),
+              Hero(
+                tag: 'login',
+                child: Container(
+                  width: 200,
+                  height: 200,
+                  decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(5),
+                      color: Colors.white,
+                      image: DecorationImage(
+                          image: AssetImage('images/main.jpeg'),
+                          fit: BoxFit.cover
+                      )
+                  ),
+                ),
+              ),
 
               Text(
                 'This is a watch shopping app in which you can browser different watches, add to cart, add new products',
@@ -67,10 +68,10 @@ class WelcomeScreen extends StatelessWidget {
                 print('Chekc');
                 Navigator.push(
                   context,
-                  MaterialPageRoute(builder: (context) =>HomeScreen()),
+                  MaterialPageRoute(builder: (context) =>LoginScreen()),
                 );
               },
-                  child: Text('List Screen', style: TextStyle(
+                  child: Text('Next', style: TextStyle(
                     color: Colors.white,
                   ),
                   ),

@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:pocwatchapp/models/product_model.dart';
 import 'package:pocwatchapp/screens/product_detail.dart';
 import 'package:pocwatchapp/utilities/constants.dart';
+import 'package:flutter/foundation.dart' show kIsWeb;
+
 
 class ProductCartPage extends StatefulWidget {
 
@@ -17,7 +19,14 @@ class _ProductCartPageState extends State<ProductCartPage> {
   Widget build(BuildContext context) {
     var size = MediaQuery.of(context).size;
 
-    final double itemHeight = (size.height - kToolbarHeight - 24) / 2;
+    double itemHeight ;
+    if (kIsWeb) {
+      itemHeight = size.height;
+      // running on the web!
+    } else {
+      itemHeight = (size.height - kToolbarHeight - 24) / 2;
+      // NOT running on the web! You can check for additional platforms here.
+    }
     final double itemWidth = size.width / 2;
 
     print(itemWidth);
